@@ -2,6 +2,8 @@
 
 ### A simple library for Android application to mange runtime permission
 
+> minSdkVersion 14
+
 #### And how to use ?
 
 Like this ,at where you want to request permission
