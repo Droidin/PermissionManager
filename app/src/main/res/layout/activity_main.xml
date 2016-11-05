@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.droidin.permissionmanager.MainActivity">
+
+    <Button
+        android:id="@+id/test_btn_camera"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="88dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="48dp"
+        android:text="相机"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintLeft_toRightOf="@+id/test_btn_camera" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        app:layout_constraintLeft_toRightOf="@+id/button7"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        app:layout_constraintLeft_toLeftOf="@+id/test_btn_camera"
+        app:layout_constraintTop_toBottomOf="@+id/test_btn_camera" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        style="@android:style/Widget.DeviceDefault.Light.SeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:max="10"
+        android:progress="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Switch"
+        app:layout_constraintRight_toRightOf="@+id/switch3"
+        app:layout_constraintTop_toBottomOf="@+id/switch3" />
+
+    <Switch
+        android:id="@+id/switch3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Switch"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3"
+        tools:ignore="HardcodedText" />
+
+    <Switch
+        android:id="@+id/switch4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Switch"
+        app:layout_constraintRight_toRightOf="@+id/switch2"
+        app:layout_constraintTop_toBottomOf="@+id/switch2"
+        tools:ignore="HardcodedText" />
+
+    <Switch
+        android:id="@+id/switch5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Switch"
+        app:layout_constraintRight_toRightOf="@+id/switch4"
+        app:layout_constraintTop_toBottomOf="@+id/switch4"
+        tools:ignore="HardcodedText" />
+
+
+</android.support.constraint.ConstraintLayout>

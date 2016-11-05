@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="app_name">PMLibrary</string>
+    <string name="dialog_title">需要相关权限</string>
+    <string name="dialog_btn_negative">取消</string>
+    <string name="dialog_btn_positive">接受</string>‘
+
+    <string name="on_denied_tip">应用程序缺少相关权限，可能导致程序无法正常运行</string>
+
+</resources>

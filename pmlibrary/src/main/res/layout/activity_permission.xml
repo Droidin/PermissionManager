@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_permission_mgr"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:layout_gravity="bottom"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/pm_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:text="@string/dialog_title"
+        android:textColor="@color/textSecondary"
+        android:textSize="21sp" />
+
+    <TextView
+        android:id="@+id/pm_reason"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="为了拍摄照片，需要使用您设备上的的摄像头"
+        android:textColor="@color/textPrimary"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/pm_tip"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="您可以前往“设置-权限管理“页面配置相关权限"
+        android:textColor="@color/textSecondary"
+        android:textSize="14sp" />
+
+
+    <View style="@style/Divider_Hor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/pm_refuse"
+            style="@style/ClickView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/dialog_btn_negative"
+            android:textColor="@color/textPrimary"
+            android:textSize="18sp" />
+
+        <View style="@style/Divider_Ver" />
+
+        <TextView
+            android:id="@+id/pm_accept"
+            style="@style/ClickView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/dialog_btn_positive"
+            android:textColor="@color/textPrimary"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
