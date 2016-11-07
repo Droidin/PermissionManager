@@ -2,7 +2,9 @@ package com.droidin.pmlibrary;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 
 /**
  * Created by bowen on 2016-11-03 0003.
@@ -44,18 +46,34 @@ public class PermissionManager {
     }
 
     /**
-     * check the permission
+     * request the permission
      *
-     * @param context    for launch check activity
-     * @param permission what permission you want to check
+     * @param context    for launch request activity
+     * @param permission what permission you want to request
      */
-    public PermissionManager check(@NonNull Context context, String permission) {
+    public PermissionManager request(@NonNull Context context, String permission) {
         Intent intent = new Intent(context, PermissionCheckActivity.class);
         intent.putExtra(PARAM_RATIONALE, pmgr.reason);
         intent.putExtra(PARAM_TIP, pmgr.tip);
         intent.putExtra(PARAM_PERMISSIONS, permission);
         context.startActivity(intent);
         return this;
+    }
+
+    /**
+     * request the permission is authorized or not
+     *
+     * @param context
+     * @param permission
+     * @return
+     */
+    private boolean check(Context context, String permission) {
+        int hasPermission = ContextCompat.checkSelfPermission(context, permission);
+        if (hasPermission == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void onResult(OnPermissionResult onPermissionResult) {
