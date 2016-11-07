@@ -5,9 +5,10 @@
     <application android:supportsRtl="true">
 
         <activity
-            android:theme="@style/LibTheme"
             android:name=".PermissionCheckActivity"
             android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
+            android:theme="@style/LibTheme"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
 
     </application>

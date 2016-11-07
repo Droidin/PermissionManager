@@ -18,7 +18,6 @@ public class BottomDialog extends BottomSheetDialog {
 
     private View mView;
     private int layoutId;
-    private int peekHeight;
 
     private OnDialogInvisible onDialogInvisible;
 

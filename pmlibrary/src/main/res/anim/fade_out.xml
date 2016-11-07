@@ -6,10 +6,4 @@
         android:fromAlpha="1.0"
         android:toAlpha="0.0" />
 
-    <translate
-        android:fromXDelta="0%p"
-        android:fromYDelta="0%p"
-        android:toXDelta="0%p"
-        android:toYDelta="50%p" />
-
 </set>

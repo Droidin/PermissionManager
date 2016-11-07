@@ -1,3 +1,7 @@
 <resources>
+
     <string name="app_name">PermissionManager</string>
+
+    <string name="user_camera">相机</string>
+
 </resources>
