@@ -67,7 +67,7 @@ public class PermissionManager {
      * @param permission
      * @return
      */
-    private boolean check(Context context, String permission) {
+    public boolean check(Context context, String permission) {
         int hasPermission = ContextCompat.checkSelfPermission(context, permission);
         if (hasPermission == PackageManager.PERMISSION_GRANTED) {
             return true;
