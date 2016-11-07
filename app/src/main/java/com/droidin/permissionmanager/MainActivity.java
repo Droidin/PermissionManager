@@ -1,10 +1,12 @@
 package com.droidin.permissionmanager;
 
 import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.droidin.pmlibrary.OnPermissionResult;
 import com.droidin.pmlibrary.PermissionManager;
@@ -31,7 +33,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .onResult(new OnPermissionResult() {
                             @Override
                             public void onResult(String permission, int result) {
-
+                                Toast.makeText(getApplicationContext()
+                                        , result == PackageManager.PERMISSION_GRANTED ? "Granted" : "Denied"
+                                        , Toast.LENGTH_SHORT)
+                                        .show();
                             }
                         });
                 break;

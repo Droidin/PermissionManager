@@ -43,7 +43,6 @@ public class PermissionCheckActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         String reason = getIntent().getStringExtra(PermissionManager.PARAM_RATIONALE);
         String tip = getIntent().getStringExtra(PermissionManager.PARAM_TIP);
 
@@ -67,7 +66,7 @@ public class PermissionCheckActivity
             case CODE_PERMISSION_REQUEST: {
                 if (PermissionManager.get().onPermissionResult == null) {
                     if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                        Toast.makeText(this.getApplicationContext(),R.string.on_denied_tip,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this.getApplicationContext(), R.string.on_denied_tip, Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     PermissionManager.get().onPermissionResult.onResult(permissions[0], grantResults[0]);
@@ -83,7 +82,9 @@ public class PermissionCheckActivity
     @Override
     public void onAction(boolean accept) {
         if (accept) {
-            if (!checkPermission(requestPerm)) {
+            if (checkPermission(requestPerm)) {
+                finish();
+            } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, requestPerm)) {
                     launchSetting();
                 } else {

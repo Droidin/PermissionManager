@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PMLibrary</string>
+    <string name="dialog_btn_negative">Deny</string>
+    <string name="dialog_btn_positive">Accept</string>
+    <string name="dialog_title">Permission Request</string>
+    <string name="on_denied_tip">Deny for using permission, might cause application crashing</string>
+</resources>

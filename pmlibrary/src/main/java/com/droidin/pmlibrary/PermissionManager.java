@@ -44,7 +44,7 @@ public class PermissionManager {
     }
 
     /**
-     * check the permissions
+     * check the permission
      *
      * @param context    for launch check activity
      * @param permission what permission you want to check
