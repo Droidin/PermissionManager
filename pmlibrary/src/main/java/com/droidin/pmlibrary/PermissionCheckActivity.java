@@ -24,11 +24,13 @@ public class PermissionCheckActivity
     private MessageDialog dialog;
     private String requestPerm;
 
+    private boolean isSettingLaunched = false;
+
     private void launchSetting() {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         intent.setData(Uri.parse("package:" + getPackageName()));
         startActivity(intent);
-        finish();
+        isSettingLaunched = true;
     }
 
     private boolean checkPermission(String permission) {
@@ -55,6 +57,14 @@ public class PermissionCheckActivity
         requestPerm = getIntent().getStringExtra(PermissionManager.PARAM_PERMISSIONS);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isSettingLaunched) {
+            finish();
+        }
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // callback
     ///////////////////////////////////////////////////////////////////////////
@@ -68,8 +78,6 @@ public class PermissionCheckActivity
                     if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                         Toast.makeText(this.getApplicationContext(), R.string.on_denied_tip, Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    PermissionManager.get().onPermissionResult.onResult(permissions[0], grantResults[0]);
                 }
                 finish();
                 break;
@@ -109,6 +117,7 @@ public class PermissionCheckActivity
     @Override
     public void finish() {
         dialog.dismiss();
+        PermissionManager.get().onPermissionResult.onResult(requestPerm, ContextCompat.checkSelfPermission(this, requestPerm));
         super.finish();
     }
 
