@@ -52,22 +52,28 @@ public class PermissionManager {
      * @param permission what permission you want to request
      */
     public PermissionManager request(@NonNull Context context, String permission) {
-        Intent intent = new Intent(context, PermissionCheckActivity.class);
-        intent.putExtra(PARAM_RATIONALE, pmgr.reason);
-        intent.putExtra(PARAM_TIP, pmgr.tip);
-        intent.putExtra(PARAM_PERMISSIONS, permission);
-        context.startActivity(intent);
+        if (check(context, permission)) {
+            if (onPermissionResult != null) {
+                onPermissionResult.onResult(permission, PackageManager.PERMISSION_GRANTED);
+            }
+        } else {
+            Intent intent = new Intent(context, PermissionCheckActivity.class);
+            intent.putExtra(PARAM_RATIONALE, pmgr.reason);
+            intent.putExtra(PARAM_TIP, pmgr.tip);
+            intent.putExtra(PARAM_PERMISSIONS, permission);
+            context.startActivity(intent);
+        }
         return this;
     }
 
     /**
-     * request the permission is authorized or not
+     * check the permission is authorized or not
      *
      * @param context
      * @param permission
      * @return
      */
-    private boolean check(Context context, String permission) {
+    public boolean check(Context context, String permission) {
         int hasPermission = ContextCompat.checkSelfPermission(context, permission);
         if (hasPermission == PackageManager.PERMISSION_GRANTED) {
             return true;
@@ -76,6 +82,11 @@ public class PermissionManager {
         }
     }
 
+    /**
+     * you need call this method to get callback
+     *
+     * @param onPermissionResult
+     */
     public void onResult(OnPermissionResult onPermissionResult) {
         this.onPermissionResult = onPermissionResult;
     }
