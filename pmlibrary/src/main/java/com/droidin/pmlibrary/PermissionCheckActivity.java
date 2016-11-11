@@ -16,7 +16,6 @@ public class PermissionCheckActivity
         extends AppCompatActivity
         implements
         MessageDialog.OnActionListener,
-        DialogInterface.OnDismissListener,
         BottomDialog.OnDialogInvisible {
 
     private static final int CODE_PERMISSION_REQUEST = 0xff;
@@ -49,8 +48,13 @@ public class PermissionCheckActivity
         String tip = getIntent().getStringExtra(PermissionManager.PARAM_TIP);
 
         dialog = new MessageDialog(this, reason, tip);
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                finish();
+            }
+        });
         dialog.setOnActionListener(this);
-        dialog.setOnDismissListener(this);
         dialog.setOnDialogInvisibleListener(this);
         dialog.show();
 
@@ -102,11 +106,6 @@ public class PermissionCheckActivity
         } else {
             finish();
         }
-    }
-
-    @Override
-    public void onDismiss(DialogInterface dialogInterface) {
-        finish();
     }
 
     @Override
