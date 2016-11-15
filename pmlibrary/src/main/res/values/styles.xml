@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="LibTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowIsTranslucent">true</item>
+    <style name="LibTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowFrame">@null</item>
-        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:noHistory">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="AlphaAnim">
         <item name="android:windowEnterAnimation">@anim/fade_in</item>
         <item name="android:windowExitAnimation">@anim/fade_out</item>
     </style>
 
-    <style name="Anim_alpha">
-        <item name="android:windowEnterAnimation">@anim/fade_in</item>
-        <item name="android:windowExitAnimation">@anim/fade_out</item>
-    </style>
-
-    <style name="bottom_dialog_anim">
+    <style name="BottomUpAnim">
         <item name="android:windowEnterAnimation">@anim/trans_to_medium</item>
         <item name="android:windowExitAnimation">@anim/trans_to_bottom</item>
     </style>
