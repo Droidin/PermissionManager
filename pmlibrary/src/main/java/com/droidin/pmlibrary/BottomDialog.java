@@ -1,8 +1,6 @@
 package com.droidin.pmlibrary;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
@@ -10,8 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 
 public class BottomDialog extends BottomSheetDialog {
@@ -40,18 +36,12 @@ public class BottomDialog extends BottomSheetDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            try {
-                Window window = getWindow();
-                window.setStatusBarColor(Color.TRANSPARENT);
-                window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                window.setWindowAnimations(R.style.bottom_dialog_anim);
-            } catch (Exception ignored) {
-            }
-        }
         if (mView == null) {
             setContentView(layoutId);
         }
+
+        getWindow().setWindowAnimations(R.style.BottomUpAnim);
+
         View view = getDelegate().findViewById(android.support.design.R.id.design_bottom_sheet);
         if (view != null) {
             final BottomSheetBehavior behavior = BottomSheetBehavior.from(view);
@@ -62,7 +52,7 @@ public class BottomDialog extends BottomSheetDialog {
                         hide();
                         behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                         if (onDialogInvisible != null) {
-                            onDialogInvisible.onInvisible();
+                            onDialogInvisible.onDialogDismiss();
                         }
                     }
                 }
@@ -100,7 +90,9 @@ public class BottomDialog extends BottomSheetDialog {
 
     @Override
     public void onBackPressed() {
-        dismiss();
+        if (onDialogInvisible != null) {
+            onDialogInvisible.onDialogDismiss();
+        }
     }
 
     public void setOnDialogInvisibleListener(OnDialogInvisible onDialogInvisible) {
@@ -108,6 +100,6 @@ public class BottomDialog extends BottomSheetDialog {
     }
 
     public interface OnDialogInvisible {
-        void onInvisible();
+        void onDialogDismiss();
     }
 }

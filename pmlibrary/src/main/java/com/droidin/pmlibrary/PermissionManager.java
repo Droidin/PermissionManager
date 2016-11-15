@@ -46,15 +46,27 @@ public class PermissionManager {
     }
 
     /**
-     * request the permission
+     * you need call this method to get callback
+     * before {@link this#request(Context, String)} called
+     *
+     * @param onPermissionResult callback
+     */
+    public PermissionManager onResult(OnPermissionResult onPermissionResult) {
+        this.onPermissionResult = onPermissionResult;
+        return this;
+    }
+
+    /**
+     * do the request
+     * after {@link this#onResult(OnPermissionResult)} called
      *
      * @param context    for launch request activity
      * @param permission what permission you want to request
      */
-    public PermissionManager request(@NonNull Context context, String permission) {
+    public void request(@NonNull Context context, String permission) {
         if (check(context, permission)) {
             if (onPermissionResult != null) {
-                onPermissionResult.onResult(permission, PackageManager.PERMISSION_GRANTED);
+                onPermissionResult.onPermissionRequestResult(permission, PackageManager.PERMISSION_GRANTED);
             }
         } else {
             Intent intent = new Intent(context, PermissionCheckActivity.class);
@@ -63,10 +75,10 @@ public class PermissionManager {
             intent.putExtra(PARAM_PERMISSIONS, permission);
             context.startActivity(intent);
         }
-        return this;
     }
 
     /**
+     * A method to
      * check the permission is authorized or not
      *
      * @param context
@@ -80,14 +92,5 @@ public class PermissionManager {
         } else {
             return false;
         }
-    }
-
-    /**
-     * you need call this method to get callback
-     *
-     * @param onPermissionResult
-     */
-    public void onResult(OnPermissionResult onPermissionResult) {
-        this.onPermissionResult = onPermissionResult;
     }
 }

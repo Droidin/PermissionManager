@@ -6,5 +6,5 @@ package com.droidin.pmlibrary;
 
 public interface OnPermissionResult {
 
-    void onResult(String permission,int result);
+    void onPermissionRequestResult(String permission, int result);
 }

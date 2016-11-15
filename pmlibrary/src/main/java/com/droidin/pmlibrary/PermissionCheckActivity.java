@@ -44,6 +44,8 @@ public class PermissionCheckActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setWindowAnimations(R.style.AlphaAnim);
+
         String reason = getIntent().getStringExtra(PermissionManager.PARAM_RATIONALE);
         String tip = getIntent().getStringExtra(PermissionManager.PARAM_TIP);
 
@@ -109,15 +111,16 @@ public class PermissionCheckActivity
     }
 
     @Override
-    public void onInvisible() {
+    public void onDialogDismiss() {
         finish();
     }
 
     @Override
     public void finish() {
         dialog.dismiss();
-        PermissionManager.get().onPermissionResult.onResult(requestPerm, ContextCompat.checkSelfPermission(this, requestPerm));
+        PermissionManager.get().onPermissionResult.onPermissionRequestResult(requestPerm, ContextCompat.checkSelfPermission(this, requestPerm));
         super.finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
     @Override
