@@ -14,31 +14,20 @@ import android.widget.Toast;
 
 public class PermissionCheckActivity
         extends AppCompatActivity
-        implements
-        MessageDialog.OnActionListener,
-        BottomDialog.OnDialogInvisible {
+        implements MessageDialog.OnActionListener, BottomDialog.OnDialogInvisible {
 
     private static final int CODE_PERMISSION_REQUEST = 0xff;
 
     private MessageDialog dialog;
     private String requestPerm;
 
-    private boolean isSettingLaunched = false;
+    private boolean isAppSettingPageLaunched = false;
 
     private void launchSetting() {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         intent.setData(Uri.parse("package:" + getPackageName()));
         startActivity(intent);
-        isSettingLaunched = true;
-    }
-
-    private boolean checkPermission(String permission) {
-        int hasPermission = ContextCompat.checkSelfPermission(this, permission);
-        if (hasPermission == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else {
-            return false;
-        }
+        isAppSettingPageLaunched = true;
     }
 
     @Override
@@ -66,7 +55,7 @@ public class PermissionCheckActivity
     @Override
     protected void onResume() {
         super.onResume();
-        if (isSettingLaunched) {
+        if (isAppSettingPageLaunched) {
             finish();
         }
     }
@@ -80,7 +69,7 @@ public class PermissionCheckActivity
                                            @NonNull int[] grantResults) {
         switch (requestCode) {
             case CODE_PERMISSION_REQUEST: {
-                if (PermissionManager.get().onPermissionResult == null) {
+                if (PermissionManager.getInstance(null).onPermissionResult == null) {
                     if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                         Toast.makeText(this.getApplicationContext(), R.string.on_denied_tip, Toast.LENGTH_SHORT).show();
                     }
@@ -96,7 +85,7 @@ public class PermissionCheckActivity
     @Override
     public void onAction(boolean accept) {
         if (accept) {
-            if (checkPermission(requestPerm)) {
+            if (PermissionManager.check(this, requestPerm)) {
                 finish();
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, requestPerm)) {
@@ -118,7 +107,11 @@ public class PermissionCheckActivity
     @Override
     public void finish() {
         dialog.dismiss();
-        PermissionManager.get().onPermissionResult.onPermissionRequestResult(requestPerm, ContextCompat.checkSelfPermission(this, requestPerm));
+        if (PermissionManager.getInstance(null).onPermissionResult != null) {
+            PermissionManager.getInstance(null)
+                    .onPermissionResult
+                    .onPermissionRequestResult(requestPerm, ContextCompat.checkSelfPermission(this, requestPerm));
+        }
         super.finish();
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
